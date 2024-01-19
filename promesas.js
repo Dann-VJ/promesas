@@ -1,18 +1,24 @@
-const ejecutarConTimeout = (ms) => {
+const sumarLento = (numero) => {
     return new Promise((resolve, reject) => {
-        // Simula una operación que toma cierto tiempo
         setTimeout(() => {
-            resolve(`Operación exitosa. Resuelta en ${ms} ms.`);
-        }, ms);
+            resolve(numero + 1);
+            // reject('Sumar lento fallo');
+        }, 800);
     });
 }
 
-// Uso de la función con timeout
-const tiempoLimite = 2000;
-ejecutarConTimeout(tiempoLimite)
-    .then((resultado) => {
-        console.log(resultado);
-    })
-    .catch((error) => {
-        console.log("Error: ", error);
+const sumarRapido = (numero) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(numero + 1);
+        }, 300);
     });
+}
+
+// Promise.all ejecuta todas las promesas y devuelve un arreglo con los resultados
+// Si falla una, fallan todas
+Promise.all([sumarLento(5), sumarRapido(10)])
+    .then(respuestas => {
+        console.log(respuestas);
+    })
+    .catch(console.log);
