@@ -17,6 +17,7 @@ const sumarRapido = (numero) => {
 
 // Promise.all ejecuta todas las promesas y devuelve un arreglo con los resultados
 // Si falla una, fallan todas
+// Ejecuta todas las promesas en paralelo
 Promise.all([sumarLento(5), sumarRapido(10)])
     .then(respuestas => {
         console.log(respuestas);
