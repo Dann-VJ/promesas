@@ -1,17 +1,26 @@
-// Peticion post
+// Fetch erchives from the server
 
-let user = {
-    name: 'John',
-    surname: 'Smith'
-};
+/* En la carpeta img realiza una solicitud de fetch a esta imagen.png 
+y muestra la imagen.png en el navegador */
 
-fetch('https://jsonplaceholder.typicode.com/posts', {
-    method: 'POST',
-    body: JSON.stringify(user),
-    headers: {
-        'Content-Type': 'application/json'
-    }gi
-})
-    .then(response => response.json())
-    .then(json => console.log(json))
-    .catch(error => console.log(error));
+
+fetch('http://127.0.0.1:5501/img/business-people.png')
+    .then(resp => resp.type === 'basic' ? resp.blob() : resp.text())
+    .then(data => {
+        if (typeof data === 'string') {
+            console.log('Es un string')
+            document.open()
+            document.write(data)
+            document.close()
+        } else {
+            console.log('Es un blob')
+            const img = document.createElement('img')
+            console.log(img)
+            img.src = URL.createObjectURL(data)
+            document.body.append(img)
+        }
+    })
+
+
+
+
